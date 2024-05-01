@@ -1,0 +1,17 @@
+{
+  "user": [
+    {
+      "id": "8dc8",
+      "username": "yaseen",
+      "password": "1234",
+      "email": "mirshal@gmail.com"
+    },
+    {
+      "id": "1812",
+      "username": "mirrr",
+      "password": "1234",
+      "email": "as@gmail.com",
+      "dob": "2024-05-02"
+    }
+  ]
+}
