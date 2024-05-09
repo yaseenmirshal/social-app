@@ -16,7 +16,9 @@
     "react": "^18",
     "react-day-picker": "^8.10.1",
     "react-dom": "^18",
-    "react-hook-form": "^7.51.3"
+    "react-hook-form": "^7.51.3",
+    "react-hot-toast": "^2.4.1",
+    "swagger-ui-react": "^5.17.6"
   },
   "devDependencies": {
     "@types/node": "^20",

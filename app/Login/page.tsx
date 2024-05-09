@@ -1,30 +1,41 @@
 'use client'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Link from 'next/link';
 import '/common.css'
-import axios ,{AxiosResponse}from 'axios';
-// import axios from 'axios';
+import axios from 'axios';
+import toast from 'react-hot-toast';
+
 
 function page() {
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('');
 
-  const handleSubmit =(e:any)=>{
+  const handleSubmit = async (e:any)=>{
+    try{
     e.preventDefault();
-    axios.get('http://localhost:3000/user')
-    .then((res: AxiosResponse<any[]>) => {
-      res.data.map((user: any)=>{
+    const response  = await axios.post('https://social-media-5ukj.onrender.com/auth/login',{email:email,password:password})
+    if(email == email) localStorage.setItem('role','user')
+      localStorage.setItem('token',response.data.token)
+    window.location.href='/Home'
+     console.log("User is created")
+     toast.success('login succeful')
+}
+  catch (error){
+    console.log(error);
+  }
 
-    if (username === user.username && password === user.password) {
-      alert('login succesful ! Welcome to Sociafy')
-      window.location.href = './Home';
-    }
-   })
+     console.log(email);
+     console.log(password);
      
-})};
 
- const handleUsernameChange = (e:any) => {
+  }
+     
+     
+// })};
+ const handleUsernameChange = (e:any) => {  
+    setEmail(e.target.value)
     setUsername(e.target.value);
   };
 
@@ -56,9 +67,6 @@ function page() {
     </label>
   </div>
 </div> 
-
-
-
 <div className="w-80 mt-5">
   <div className="relative w-full min-w-[200px] h-10">
     <input

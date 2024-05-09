@@ -1,4 +1,4 @@
-'use client';
+ 'use client';
 import React, { useState } from 'react';
 import Link from 'next/link';
 import axios from  'axios'
@@ -8,20 +8,20 @@ function Page() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
-  const [dob, setdob] = useState('')
-
 
   const handleSubmit = (e:any) => {
     e.preventDefault();
-    axios.post("http://localhost:3000/user",{
-      username, password, email,dob
+    axios.post("https://social-media-5ukj.onrender.com/auth/register",{
+      username, password, email
     })
     if (validate()) {
       alert('Form Submitted Successfully');
       window.location.href = './Login';
     }
   };
+  console.log(username,password,email);
   
+
   const validate = () => {
     let result = true;
     if (username === '' || username === null) {
@@ -30,7 +30,7 @@ function Page() {
     }
     if (password === '' || password === null) {
       result = false;
-      alert('Please enter your Password');
+      alert('Please enter your Password'); 
     }
     return result;
   };
@@ -46,9 +46,7 @@ function Page() {
   const handleEmailChange = (e:any) => {
     setEmail(e.target.value);
   }
-  const handledobchange = (e:any) => {
-    setdob(e.target.value);
-  }
+
 
   return (
     <>
@@ -128,8 +126,6 @@ function Page() {
                   className="peer w-full h-full bg-transparent text-blue-gray-700 font-sans font-normal outline outline-0 focus:outline-0 disabled:bg-blue-gray-50 disabled:border-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 border focus:border-2 border-t-transparent focus:border-t-transparent text-sm px-3 py-2.5 rounded-[7px] border-blue-gray-200 focus:border-gray-900"
                   placeholder=" "
                   type="date"
-                  value={dob}
-                  onChange={handledobchange}
                   required
                 />
                 <label

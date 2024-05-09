@@ -1,17 +1,32 @@
 {
   "user": [
     {
-      "id": "8dc8",
+      "id": "6fb9",
       "username": "yaseen",
       "password": "1234",
-      "email": "mirshal@gmail.com"
+      "email": "yaseen@gmail.com",
+      "dob": "2024-05-07"
     },
     {
-      "id": "1812",
-      "username": "mirrr",
+      "id": "bbc6",
+      "username": "shuhaib malik",
+      "password": "112233",
+      "email": "malik@gmail.com",
+      "dob": "2024-05-09"
+    },
+    {
+      "id": "12e2",
+      "username": "mirshal",
       "password": "1234",
-      "email": "as@gmail.com",
-      "dob": "2024-05-02"
+      "email": "mirshal5@gmail.com",
+      "dob": "2024-05-03"
+    },
+    {
+      "id": "1f5c",
+      "username": "ym",
+      "password": "112233",
+      "email": "ym@gmail.com",
+      "dob": "2024-05-14"
     }
   ]
 }
