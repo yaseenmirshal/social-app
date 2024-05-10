@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import React from 'react'
 import '/common.css' 
-import Notification from'../Notification/page.tsx';
+import Notification from '../Components/Notification'
 
 
 function page() {

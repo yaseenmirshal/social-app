@@ -1,17 +1,15 @@
 'use client'
-import React, { useState } from 'react'
 
 
-function page() {
-      const [isWhite, setIsWhite] = useState(true);
-
-  const toggleColor = () => {
-    setIsWhite(!isWhite);
+type NotificationProps = {
+  isWhite: boolean;
 }
 
+const Notification: React.FC<NotificationProps> = ({ isWhite }: NotificationProps) => {
+  
   return (                                                                                                                                                        
     <>
-    <div style={{height:'100vh',width:'345px',backgroundColor:isWhite ? '#1A0033' : 'white' ,color:isWhite ? 'white' : 'black',borderLeft:'1px solid #333'}} className='float-left '>
+    <div style={{height:'100vh',width:'355px',backgroundColor:isWhite ? '#1A0033' : 'white' ,color:isWhite ? 'white' : 'black',borderLeft:'1px solid #333'}} className='float-left '>
      {/* <img style={{width:'150px',marginLeft:'90px',marginTop:'20px'}} src="whitelogo.png" alt="" /> */}
      <h1 className='text-xl font-bold  ml-7 mt-7'>Requests</h1>
      <div style={{width:'345px',height:'290px',backgroundColor:isWhite ? '#1A0033' : 'white' ,color:isWhite ? 'white' : 'black',marginTop:'20px',borderBottom:'1px solid #333'}}>
@@ -23,9 +21,6 @@ function page() {
 
       <div className='w-[345px] h-14 '> <div className='float-left  ml-4 mr-2' style={{marginTop:'0px', height:'50px',width:'50px',backgroundImage: 'url(\'ali.png\')', backgroundSize: 'cover', backgroundPosition: 'center',borderRadius:'100px 100px 100px 100px '}}></div>
       <h3 className='  ml-2 text-[15px]'><b>alishan_gafoor</b> </h3> <p className='text-gray-400 text-[13px]'> wants to add you to friends</p> <button className='text-blue-500 mr-2'>Accept</button> <button className='text-gray-300 hover:text-red-500'>Decline</button></div>
-
-
-
 
      <div className='flex justify-center w-[345px] h-9 mt-3 '>
       <p className='mt-5 text-sm text-blue-500'>View All Requests</p>
@@ -68,4 +63,5 @@ function page() {
   )
 }
 
-export default page
+
+export default Notification

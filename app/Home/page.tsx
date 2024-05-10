@@ -2,65 +2,46 @@
 import React, { useState } from 'react'
 import '/common.css'
 import Link from 'next/link';
-import Notification from '../Notification/page'
 import axios from 'axios';
-
+import { toast } from 'react-hot-toast';
+  import Notification from '../Components/Notification';
+  import Profilebox from '../Components/Profilebox';
+  
 
 
 function page() {
-
-  const[like,setlike]=useState()
-  const[like1,setlike1]=useState()
-
-  const [post,setPost]=useState([])
-
-  const [imageIndex, setImageIndex] = useState(0);
-
-  const images = ['/whitelogo.png', '/sociafy.png'];
   
+  const [imageIndex, setImageIndex] = useState(0);
+  const images = ['/whitelogo.png', '/sociafy.png'];
 
   const [isWhite, setIsWhite] = useState(true);
+
 
   const toggleColor = () => {
     setIsWhite(!isWhite);
     setImageIndex((prevIndex) => (prevIndex === 0 ? 1 : 0));
   };
-
-    const handlePlusButtonClick = () => {
-      const inputElement = document.getElementById('fileInput');
-      if (inputElement) {
-        inputElement.click();
-      }
-    };
-    
-    console.log(localStorage.getItem("user.user"));
+  const [post, setPost] = useState('');
+  const handlePlusButtonClick = (e:any) => {
+    const inputElement = document.getElementById('fileInput');
+    if (inputElement) {
+      inputElement.click();
+    }
+    setPost(e.target.value);
+    console.log(post);
+    axios.post('https://social-media-5ukj.onrender.com/createPost', {file: post })
+    .then(response => console.log('Post created:', response.data))
+    .catch(error => console.error('Error creating post:', error));
+  };
+    // console.log(localStorage.getItem("user.user"));
   
   return (
     <>
 
-    <div style={{width:'100%',height:'100vh'}}>
-        <div className="flex justify-center float-left " style={{width:'365px',height:'100vh',backgroundColor:isWhite ? '#1A0033' : 'white'}}>
-        <div  style={{width:'365px',height:'290px',backgroundColor:isWhite ? '#1A0033' : 'white' ,color:isWhite ? 'white' : 'black'}}>
-          <div className='ml-32' style={{backgroundImage: 'url(\'https://pyxis.nymag.com/v1/imgs/414/172/44ee5a8cc13d3735612e70d2cbeac2be6f-03-paul-walker-memory.rsquare.w400.jpg\')', backgroundSize: 'cover', backgroundPosition: 'center', marginTop:'30px', height:'110px',width:'110px',borderRadius:'100px 100px 100px 100px ',color:isWhite ? 'white' : 'black'}}></div>
-          <Link href={'./Profile'}>
-          <h1 className='mt-4 cursor-pointer hover:underline' style={{ fontSize:'19px',textAlign: "center",color:isWhite ? 'white' : 'black'}}>{localStorage.getItem("user.user")}
-          
-          </h1>
-          </Link>
-          <br/><br/>
-          <div className=' flex items-center' style={{marginTop:'-20px',width:'365px',height:'30px',backgroundColor:isWhite ? '#1A0033' : 'white'}}>
-            <h2 className='ml-16 font-semibold' style={{ textAlign: "center"}}>28</h2>
-            <h2 className='ml-20 font-semibold' style={{textAlign: "center"}}>2.2k</h2>
-            <h2 className='ml-20 font-semibold' style={{textAlign: "center"}}>789</h2>
-          </div>
-        
-          <div className=' flex items-center' style={{color:isWhite ? 'white' : 'black'}}>
-      
-            <p style={{fontWeight:'200',fontSize:'15px'}} className=' ml-14'>Posts</p>
-            <p style={{fontWeight:'200',fontSize:'15px'}} className='ml-12'>Followers</p>
-            <p style={{fontWeight:'200',fontSize:'15px'}} className=' ml-12'>Following</p>
-          </div>
-          <hr style={{marginTop:'25px'}} className="border-l-1 border-stone-700" />
+    <div style={{width:'100%',height:'100vh',backgroundColor:'violet'}}>
+    
+          <div className='float-left' style={{width:'365px',height:'812px',backgroundColor:isWhite ? '#1A0033' : 'white' ,color:isWhite ? 'white' : 'black'}}>
+          <Profilebox  isWhite={isWhite}/>
           <svg  xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className=" w-6 h-6  mt-10 ml-12 cursor-pointer">
   <path strokeLinecap="round" strokeLinejoin="round" d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
 </svg>
@@ -92,14 +73,14 @@ function page() {
     <span className="slider"></span>
 </label>
 <Link href={'./Login'}>
-<svg  xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6  mt-36 ml-12 cursor-pointer">
+<svg  xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6  mt-40 ml-12 cursor-pointer">
   <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 9V5.25A2.25 2.25 0 0 1 10.5 3h6a2.25 2.25 0 0 1 2.25 2.25v13.5A2.25 2.25 0 0 1 16.5 21h-6a2.25 2.25 0 0 1-2.25-2.25V15m-3 0-3-3m0 0 3-3m-3 3H15" />
 </svg>
 <p className='cursor-pointer' style={{marginLeft:'90px',marginTop:'-25px'}}>Log out</p>
 </Link>
         </div>
-        </div>
-      <div style={{height:'100vh',backgroundColor:isWhite ? '#1A0033' : 'white' ,color:isWhite ? 'white' : 'black'}} className='overflow-scroll  float-left  w-1/2 hide-scrollbar'>
+       
+      <div  style={{height:'100vh',backgroundColor:isWhite ? '#1A0033' : 'white' ,color:isWhite ? 'white' : 'black'}} className='float-left overflow-scroll  w-1/2 hide-scrollbar'>
        <div className="pt-2 relative mx-auto text-slate-50">
          <img className='float-left' style={{width:'150px',marginLeft:'10px',marginTop:'20px'}} src={images[imageIndex]} alt="sociafy" />
        <input
@@ -117,7 +98,6 @@ function page() {
       />
       <label
         htmlFor="fileInput"/>
-
 
 
         <button onClick={handlePlusButtonClick}  className="  ml-[46px] mt-5 btn btn--primary ">
@@ -233,8 +213,9 @@ function page() {
 
 </div>
       </div>
-     </div>
-    <Notification />
+     </div> 
+    <Notification isWhite={isWhite}   />
+
      </div>
     </>
   )

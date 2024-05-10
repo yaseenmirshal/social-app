@@ -24,12 +24,13 @@ function page() {
 }
   catch (error){
     console.log(error);
+    toast.error('please enter valid credentials')
   }
 
      console.log(email);
      console.log(password);
      
-
+  
   }
      
      
