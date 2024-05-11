@@ -16,8 +16,10 @@ function page() {
     try{
     e.preventDefault();
     const response  = await axios.post('https://social-media-5ukj.onrender.com/auth/login',{email:email,password:password})
+    console.log(response)
     if(email == email) localStorage.setItem('role','user')
       localStorage.setItem('token',response.data.token)
+    localStorage.setItem('userId',response.data._id)
     window.location.href='/Home'
      console.log("User is created")
      toast.success('login succeful')
@@ -26,11 +28,8 @@ function page() {
     console.log(error);
     toast.error('please enter valid credentials')
   }
-
      console.log(email);
      console.log(password);
-     
-  
   }
      
      

@@ -21,7 +21,6 @@ function Page() {
   };
   console.log(username,password,email);
   
-
   const validate = () => {
     let result = true;
     if (username === '' || username === null) {

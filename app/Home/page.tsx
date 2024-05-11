@@ -1,12 +1,14 @@
 'use client'
-import React, { useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import '/common.css'
 import Link from 'next/link';
 import axios from 'axios';
 import { toast } from 'react-hot-toast';
   import Notification from '../Components/Notification';
   import Profilebox from '../Components/Profilebox';
-  
+  import Modalbox from '../Components/Modalbox'
+import instance from '../instence/instence';
+import { Anybody } from 'next/font/google';
 
 
 function page() {
@@ -21,26 +23,54 @@ function page() {
     setIsWhite(!isWhite);
     setImageIndex((prevIndex) => (prevIndex === 0 ? 1 : 0));
   };
-  const [post, setPost] = useState('');
-  const handlePlusButtonClick = (e:any) => {
-    const inputElement = document.getElementById('fileInput');
-    if (inputElement) {
-      inputElement.click();
+
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const [selectFile,setSelectFile] = useState('')
+
+  const handleUpload = () => {
+    if (fileInputRef.current) {
+      fileInputRef.current.click();
     }
-    setPost(e.target.value);
-    console.log(post);
-    axios.post('https://social-media-5ukj.onrender.com/createPost', {file: post })
-    .then(response => console.log('Post created:', response.data))
-    .catch(error => console.error('Error creating post:', error));
   };
-    // console.log(localStorage.getItem("user.user"));
-  
+
+  async function handleApi(post : any) {
+    const formData = new FormData();
+    formData.append('file', post);
+    formData.append('desc', 'Any description'); 
+    formData.append('userId', '663c610c0fe5ec8be36a53fe'); 
+
+    try {
+      const response = await instance.post('/createPost', formData, {
+        headers: { 'Content-Type': 'multipart/form-data' }
+      });
+      console.log('Post created:', response.data);
+    } catch (error) {
+      console.error('Error creating post:', error);
+      console.log('............................')
+    }
+  }
+  useEffect(() => {
+    if (selectFile) {
+      handleApi(selectFile);
+    }
+  }, [selectFile]);
+
+  const handleFile = (e:any) => {
+    const inputFile = e.target.files[0];
+    setSelectFile(inputFile);
+    if (inputFile) {
+      console.log('Selected file:', inputFile);
+    } else {
+      console.log('No file selected.');
+    }
+  };
+
   return (
     <>
 
     <div style={{width:'100%',height:'100vh',backgroundColor:'violet'}}>
     
-          <div className='float-left' style={{width:'365px',height:'812px',backgroundColor:isWhite ? '#1A0033' : 'white' ,color:isWhite ? 'white' : 'black'}}>
+          <div className='float-left' style={{width:'365px',height:'813px',backgroundColor:isWhite ? '#1A0033' : 'white' ,color:isWhite ? 'white' : 'black'}}>
           <Profilebox  isWhite={isWhite}/>
           <svg  xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className=" w-6 h-6  mt-10 ml-12 cursor-pointer">
   <path strokeLinecap="round" strokeLinejoin="round" d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
@@ -79,7 +109,6 @@ function page() {
 <p className='cursor-pointer' style={{marginLeft:'90px',marginTop:'-25px'}}>Log out</p>
 </Link>
         </div>
-       
       <div  style={{height:'100vh',backgroundColor:isWhite ? '#1A0033' : 'white' ,color:isWhite ? 'white' : 'black'}} className='float-left overflow-scroll  w-1/2 hide-scrollbar'>
        <div className="pt-2 relative mx-auto text-slate-50">
          <img className='float-left' style={{width:'150px',marginLeft:'10px',marginTop:'20px'}} src={images[imageIndex]} alt="sociafy" />
@@ -88,19 +117,15 @@ function page() {
         className="`bg-white ${isWhite ? 'bg-opacity-25' : ''}` float-left ml-6 mt-4 w-72 h-12 px-5 rounded-xl text-base focus:outline-none border-none"
         type="search"
         name="search"
-        placeholder="Search"
-        />
+        placeholder="Search"/>
         <input
-        id="fileInput"
+        ref={fileInputRef}
+        onChange={handleFile}
         type="file"
         accept="image/*"
         style={{ display: 'none' }}
       />
-      <label
-        htmlFor="fileInput"/>
-
-
-        <button onClick={handlePlusButtonClick}  className="  ml-[46px] mt-5 btn btn--primary ">
+        <button onClick={handleUpload}  className="  ml-[46px] mt-5 btn btn--primary ">
 <span className="btn-inner ">
   <span className="btn-label">
   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="float-left w-6 h-6">
@@ -111,7 +136,7 @@ function page() {
   <span className="btn-blur" ></span>
 </span>
 </button>
-
+{/* <Modalbox/> */}
      </div>
      <div >
      <h1 className='text-xl font-bold ml-7 mt-7'>Stories</h1>
