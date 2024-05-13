@@ -67,15 +67,17 @@ function page() {
 
   return (
     <>
-
     <div style={{width:'100%',height:'100vh',backgroundColor:'violet'}}>
-    
+
+
+
+
+      
           <div className='float-left' style={{width:'365px',height:'813px',backgroundColor:isWhite ? '#1A0033' : 'white' ,color:isWhite ? 'white' : 'black'}}>
           <Profilebox  isWhite={isWhite}/>
           <svg  xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className=" w-6 h-6  mt-10 ml-12 cursor-pointer">
   <path strokeLinecap="round" strokeLinejoin="round" d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
 </svg>
-
 <p className='cursor-pointer' style={{marginLeft:'90px',marginTop:'-25px',fontWeight:'bold'}}>Feed</p>
 <svg  xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-7 h-7  mt-7 ml-12 cursor-pointer ">
   <path strokeLinecap="round" strokeLinejoin="round" d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0 1 11.186 0Z" />
@@ -137,6 +139,7 @@ function page() {
 </span>
 </button>
 {/* <Modalbox/> */}
+
      </div>
      <div >
      <h1 className='text-xl font-bold ml-7 mt-7'>Stories</h1>

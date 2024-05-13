@@ -84,7 +84,6 @@ function page() {
   </div>
 </div> 
 
-
 <button type='submit' className=" w-80 mt-7 bg-gray-800 hover:bg-gray-900 text-white font-medium py-2 px-4 rounded-lg shadow-md transition duration-300 ease-in-out">
   Login
 </button>
